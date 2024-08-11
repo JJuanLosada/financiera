@@ -4,6 +4,7 @@ package com.example.financiera.mapper;
 import com.example.financiera.Dto.MProductoDto;
 import com.example.financiera.Dto.ProductoDto;
 
+import com.example.financiera.entity.ClienteEntity;
 import com.example.financiera.entity.ProductoEntity;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.Random;
 
 public class ProductoMapper {
 
-    public static ProductoEntity productoDtoToProductoEntity(ProductoDto productoDto, String AHORRO, String CORRIENTE){
+    public static ProductoEntity productoDtoToProductoEntity(ProductoDto productoDto, String AHORRO, String CORRIENTE, ClienteEntity clienteEntity){
         ProductoEntity productoEntity = new ProductoEntity();
         productoEntity.setSaldo(productoDto.getSaldo());
         productoEntity.setTipoCuenta(productoDto.getTipoCuenta());
@@ -32,15 +33,14 @@ public class ProductoMapper {
         productoEntity.setExenta_gmf(productoDto.getExenta_gmf());
         productoEntity.setCreacion(LocalDate.now());
         productoEntity.setTipoCuenta(productoDto.getTipoCuenta());
-        productoEntity.setCliente(productoDto.getIdClienteEntity());
+        productoEntity.setCliente(clienteEntity);
         return productoEntity;
     }
 
-    public static ProductoEntity MproductoDtoToProductoEntity(MProductoDto mproductoDto,String AHORRO,String CORRIENTE){
-        ProductoEntity productoEntity = new ProductoEntity();
+    public static ProductoEntity MproductoDtoToProductoEntity(MProductoDto mproductoDto,String AHORRO,String CORRIENTE,ClienteEntity clienteEntity,ProductoEntity productoEntity){
+
         productoEntity.setSaldo(mproductoDto.getSaldo());
         productoEntity.setTipoCuenta(mproductoDto.getTipoCuenta());
-
         Random random = new Random();
         StringBuilder numerosAleatorios = new StringBuilder();
 
@@ -58,7 +58,7 @@ public class ProductoMapper {
         productoEntity.setExenta_gmf(mproductoDto.getExenta_gmf());
         productoEntity.setModificacion(LocalDate.now());
         productoEntity.setTipoCuenta(mproductoDto.getTipoCuenta());
-
+        productoEntity.setCliente(clienteEntity);
         return productoEntity;
     }
 }

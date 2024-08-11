@@ -54,12 +54,11 @@ public class ClienteImpl implements IClienteService {
     @Override
     public ClienteEntity modificar(Long id, ClienteDto clienteDto) {
 
-        Optional<ClienteEntity> existe=iClienteRepository.findById(id);
 
 
-        if(!existe.isPresent()){
-            throw new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ID);
-        }
+        ClienteEntity clienteEntity = iClienteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ID));
+
 
         LocalDate ahora = LocalDate.now();
         LocalDate nacimiento = clienteDto.getNacimiento();
@@ -77,7 +76,7 @@ public class ClienteImpl implements IClienteService {
         } else if (!pattern.matcher(clienteDto.getCorreo()).matches()) {
             throw new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_CORREO_CLIENTE);
         } else {
-            ClienteEntity clienteEntityUpdate = ClienteMapper.MclienteDtoToClienteEntity(clienteDto);
+            ClienteEntity clienteEntityUpdate = ClienteMapper.MclienteDtoToClienteEntity(clienteDto,clienteEntity);
             return iClienteRepository.save(clienteEntityUpdate);
         }
 

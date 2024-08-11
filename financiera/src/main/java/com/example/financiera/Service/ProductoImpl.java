@@ -15,9 +15,9 @@ import com.example.financiera.mapper.ProductoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+
 import java.util.Optional;
-import java.util.Random;
+
 
 @Service
 public class ProductoImpl implements IProductoService {
@@ -30,9 +30,11 @@ public class ProductoImpl implements IProductoService {
 
     @Override
     public ProductoEntity crear(ProductoDto productoDto) {
-        Long ClienteId= productoDto.getIdClienteEntity().getId();
-        Optional<ClienteEntity> existe=iClienteRepository.findById(ClienteId);
-        if(existe.isPresent()){
+        Long clienteId = productoDto.getIdCliente();
+        ClienteEntity clienteEntity = iClienteRepository.findById(clienteId)
+                .orElseThrow(() -> new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ASOCIADO_PRODUCTO));
+
+
 
             final String AHORRO="ahorro";
             final String CORRIENTE="corriente";
@@ -44,24 +46,25 @@ public class ProductoImpl implements IProductoService {
             } else if (AHORRO.equalsIgnoreCase(productoDto.getTipoCuenta())&& productoDto.getSaldo()<0) {
                 throw new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_SALDO_PRODUCTO);
             }
-            ProductoEntity clienteEntitySave = ProductoMapper.productoDtoToProductoEntity(productoDto,AHORRO,CORRIENTE);
+            ProductoEntity clienteEntitySave = ProductoMapper.productoDtoToProductoEntity(productoDto,AHORRO,CORRIENTE,clienteEntity);
             return iProductoRepository.save(clienteEntitySave);
 
 
             
 
-        }else {
-            throw new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ASOCIADO_PRODUCTO);
-        }
+
     }
 
     @Override
-    public ProductoEntity modificar(Long id, MProductoDto mProductoDto) {
+    public ProductoEntity modificar( Long id,MProductoDto mProductoDto) {
+        Long clienteId = mProductoDto.getIdCliente();
+        ClienteEntity clienteEntity = iClienteRepository.findById(clienteId)
+                .orElseThrow(() -> new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ID));
 
-        Optional<ClienteEntity> cuenta=iClienteRepository.findById(id);
-        if(!cuenta.isPresent()){
-            throw new IllegalArgumentException("Ese Id no existe: "+id);
-        }else {
+        ProductoEntity productoEntity = iProductoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ASOCIADO_PRODUCTO));
+
+
 
 
                 final String AHORRO = "ahorro";
@@ -79,7 +82,7 @@ public class ProductoImpl implements IProductoService {
                 }   else if (CANCELADA.equalsIgnoreCase(mProductoDto.getEstado())&&mProductoDto.getSaldo()==0) {
                     throw new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_CANCELAR_PRODUCTO);
                 }
-            ProductoEntity clienteEntityUpdate = ProductoMapper.MproductoDtoToProductoEntity(mProductoDto,AHORRO,CORRIENTE);
+            ProductoEntity clienteEntityUpdate = ProductoMapper.MproductoDtoToProductoEntity(mProductoDto,AHORRO,CORRIENTE,clienteEntity,productoEntity);
             return iProductoRepository.save(clienteEntityUpdate);
 
 
@@ -87,7 +90,7 @@ public class ProductoImpl implements IProductoService {
 
 
 
-        }
+
     }
 
 

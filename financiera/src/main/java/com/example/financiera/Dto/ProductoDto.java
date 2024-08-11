@@ -17,5 +17,5 @@ public class ProductoDto {
 
     private Float saldo;
     private String exenta_gmf;
-    private ClienteEntity idClienteEntity;
+    private Long idCliente;
 }

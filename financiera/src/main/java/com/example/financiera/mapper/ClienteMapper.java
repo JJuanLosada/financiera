@@ -18,8 +18,8 @@ public class ClienteMapper {
         clienteEntity.setCreacion(LocalDate.now());
         return clienteEntity;
     }
-    public static ClienteEntity MclienteDtoToClienteEntity(ClienteDto clienteDto){
-        ClienteEntity clienteEntity = new ClienteEntity();
+    public static ClienteEntity MclienteDtoToClienteEntity(ClienteDto clienteDto,ClienteEntity clienteEntity){
+
         clienteEntity.setNombre(clienteDto.getNombre());
         clienteEntity.setApellido(clienteDto.getApellido());
         clienteEntity.setCorreo(clienteDto.getCorreo());

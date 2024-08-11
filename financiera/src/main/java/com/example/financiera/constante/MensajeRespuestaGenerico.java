@@ -11,4 +11,6 @@ public class MensajeRespuestaGenerico {
     public static final String MENSAJE_ERROR_ASOCIADO_PRODUCTO="El producto no esta asociado a un cliente";
     public static final String MENSAJE_ERROR_ESTADO_PRODUCTO="La cuenta debe estar en estado : ACTIVA , INACTIVA o CANCELADA";
     public static final String MENSAJE_ERROR_CANCELAR_PRODUCTO="El saldo deba estar en 0 para cancelar la cuenta";
+    public static final String MENSAJE_ERROR_PRODUCTO="No se encontro el producto financiero";
+    public static final String MENSAJE_ERROR_PRODUCTO_SALDO_INSUFICIENTE="No tienes saldo suficiente";
 }
