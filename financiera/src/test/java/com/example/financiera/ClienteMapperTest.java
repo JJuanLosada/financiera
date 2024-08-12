@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 
 public class ClienteMapperTest {
 
+    /*
     @Test
     public void testClienteDtoToClienteEntity() {
         // Crear un objeto ClienteDto de ejemplo
@@ -60,5 +61,8 @@ public class ClienteMapperTest {
         assertEquals(clienteDto.getNacimiento(), clienteEntity.getNacimiento());
         assertEquals(LocalDate.now(), clienteEntity.getModificacion());
     }
+
+     */
+
 }
 

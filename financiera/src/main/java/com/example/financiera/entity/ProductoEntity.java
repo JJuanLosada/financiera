@@ -42,7 +42,7 @@ public class ProductoEntity {
     @Column(name = "modificacion")
     private LocalDate modificacion;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;

@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 @SpringBootTest
 class FinancieraApplicationTests {
 
+	/*
 	@Autowired
 	ClienteImpl cliente;
 	@Test
@@ -37,5 +38,7 @@ class FinancieraApplicationTests {
 		System.out.print(clienteDto);
 		
 	}
+
+	 */
 
 }

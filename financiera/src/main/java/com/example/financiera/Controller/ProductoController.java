@@ -19,6 +19,7 @@ public class ProductoController {
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody ProductoDto productoDto){
         try {
+
             ProductoEntity response=iProductoService.crear(productoDto);
             return ResponseEntity.ok(response);
         }catch (IllegalArgumentException e){
@@ -26,7 +27,7 @@ public class ProductoController {
         }
     }
 
-    @PostMapping("/modificar/{id}")
+    @PutMapping("/modificar/{id}")
     public ResponseEntity<?> modificar(@PathVariable Long id, @RequestBody MProductoDto mProductoDto) {
         try {
             ProductoEntity response = iProductoService.modificar(id, mProductoDto);

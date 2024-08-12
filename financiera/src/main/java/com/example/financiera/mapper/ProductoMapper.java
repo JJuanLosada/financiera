@@ -61,4 +61,14 @@ public class ProductoMapper {
         productoEntity.setCliente(clienteEntity);
         return productoEntity;
     }
+
+    public static ProductoDto productoEntityToProductoDto(ProductoEntity productoEntity){
+        ProductoDto productoDto = new ProductoDto();
+        productoDto.setIdCliente(productoEntity.getCliente().getId());
+        productoDto.setTipoCuenta(productoEntity.getTipoCuenta());
+        productoDto.setSaldo(productoEntity.getSaldo());
+        productoDto.setExenta_gmf(productoEntity.getExenta_gmf());
+
+        return productoDto;
+    }
 }

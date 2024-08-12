@@ -34,12 +34,8 @@ public class ProductoImpl implements IProductoService {
         ClienteEntity clienteEntity = iClienteRepository.findById(clienteId)
                 .orElseThrow(() -> new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_ASOCIADO_PRODUCTO));
 
-
-
             final String AHORRO="ahorro";
             final String CORRIENTE="corriente";
-
-
 
             if(!AHORRO.equalsIgnoreCase(productoDto.getTipoCuenta())&&!CORRIENTE.equalsIgnoreCase(productoDto.getTipoCuenta())){
                 throw new IllegalArgumentException(MensajeRespuestaGenerico.MENSAJE_ERROR_TIPO_CUENTA_PRODUCTO);

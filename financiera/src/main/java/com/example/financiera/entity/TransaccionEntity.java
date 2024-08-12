@@ -1,5 +1,6 @@
 package com.example.financiera.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,10 +31,12 @@ public class TransaccionEntity {
     @Column(name = "fecha")
     private LocalDate fecha;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cuenta_origen_id")
     private ProductoEntity cuentaOrigen;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cuenta_destino_id") // The account to which the money is deposited
     private ProductoEntity cuentaDestino;

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TransccionService implements ITransaccionService {
+public class TransccionImpl implements ITransaccionService {
     @Autowired
     private ITransaccionRepository iTransaccionRepository;
 
